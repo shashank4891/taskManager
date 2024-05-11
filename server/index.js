@@ -1,5 +1,8 @@
+require("dotenv").config();
+
 // import express
 const express = require("express");
+const { connectToMongoDB } = require("./database");
 
 // create an instance of express called app
 const app = express();
@@ -16,9 +19,12 @@ app.get("/hello", (req, res) => {
 });
 
 // create a port variable
-const port = 5050;
+const port = process.env.PORT || 5000;
 
-// listen to our server on our localhost
-app.listen(port, () => {
-    console.log(`Server is listening on http://localhost:${port}`);
-})
+const startServer = async () => {
+    await connectToMongoDB();
+    app.listen(port, () => {
+        console.log(`Server is listening on http://localhost:${port}`);
+    });
+};
+startServer();
