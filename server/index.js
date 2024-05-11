@@ -6,6 +6,7 @@ const { connectToMongoDB } = require("./database");
 
 // create an instance of express called app
 const app = express();
+app.use(express.json());
 
 // import our todos router
 const router = require("./routes");
