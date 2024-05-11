@@ -4,6 +4,12 @@ const express = require("express");
 // create an instance of express called app
 const app = express();
 
+// import our todos router
+const router = require("./routes");
+
+// use /api to prefix our endpoints
+app.use("/api", router);
+
 // create a test router
 app.get("/hello", (req, res) => {
     res.status(200).json({ mssg: "hello" });
